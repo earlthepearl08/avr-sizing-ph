@@ -514,9 +514,17 @@ Thank you!`;
                 // Show in summary box
                 document.getElementById('spec-summary').innerText = `${finalKVA}kVA ${cfg.phase}P ${cfg.v}V for ${equipment}`;
 
-                // Set the link
+                // Set the link using "Smart Link" logic
+                const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
                 const lnk = document.getElementById('lnk-quote');
-                lnk.href = "https://www.facebook.com/messages/t/kinmopwcorporation?text=" + encoded;
+
+                if (isMobile) {
+                    // m.me is best for triggering the app on mobile
+                    lnk.href = "https://m.me/kinmopwcorporation?text=" + encoded;
+                } else {
+                    // Full URL avoids SSL/security warnings on desktop browsers
+                    lnk.href = "https://www.facebook.com/messages/t/kinmopwcorporation?text=" + encoded;
+                }
 
                 // Storage for manual copy button
                 window.lastProfile = messageText;
